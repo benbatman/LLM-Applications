@@ -1,23 +1,16 @@
 import streamlit as st 
 import json
-import pandas as pd
-from streamlit_chat import message # if you want true chatbot style UI 
 from sentence_transformers import SentenceTransformer
 from langchain.embeddings.openai import OpenAIEmbeddings 
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.chat_models import ChatOpenAI
 from langchain.vectorstores import FAISS
-from langchain.vectorstores.pgvector import PGVector 
 from langchain.chains.query_constructor.base import AttributeInfo
 from langchain.schema import Document
 from langchain.chains import ConversationalRetrievalChain
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.memory import ConversationBufferMemory
-from langchain.schema import(
-    SystemMessage,
-    HumanMessage,
-    AIMessage
-)
+
 
 #################################################################
 
