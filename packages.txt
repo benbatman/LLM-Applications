@@ -2,5 +2,4 @@ streamlit
 langchain
 openai
 sentence-transformers
-numpy
 faiss-cpu
