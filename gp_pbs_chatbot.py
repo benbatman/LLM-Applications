@@ -79,8 +79,9 @@ def print_embedding_cost(texts):
 
 def main():
     import os 
-    from dotenv import load_dotenv, find_dotenv
-    load_dotenv(find_dotenv(), override=True)
+    # from dotenv import load_dotenv, find_dotenv
+    # load_dotenv(find_dotenv(), override=True)
+    os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY'] # Specific to cloud deployment with streamlit
 
 
     st.set_page_config(
@@ -132,16 +133,6 @@ def main():
                 st.session_state.history = f'{value} \n {"*"*100} \n {st.session_state.history}'
                 h = st.session_state.history
                 st.text_area(label='Chat History', value=h, key='history', height=400)
-
-
-    # for i, msg in enumerate(st.session_state.messages[1:]):
-    #     if i % 2 == 0:
-    #         message(msg.content, is_user=True)
-    #     else:
-    #         message(msg.content, is_user=False)
-
-
-
 
 ###############################################
 
