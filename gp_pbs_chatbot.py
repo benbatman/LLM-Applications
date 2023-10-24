@@ -50,10 +50,11 @@ def main():
     # Save messages to the session state if not already
     if 'messages' not in st.session_state:
         st.session_state.messages = []
+        
+    if len(st.session_state.messages) > 4:
+        st.session_state.messages = []
+        st.session_state.history = ''
     
-    # if 'memory' not in st.session_state:
-    #     st.session_state.memory = get_memory()
-
     chat_history = st.session_state.messages
 
     question = st.text_input('Chat with your custom PBS assistant!')
@@ -91,13 +92,6 @@ def main():
 
             chat_history.append((question, response['answer']))
             st.session_state.messages = chat_history
-
-
-    # for i, msg in enumerate(st.session_state.messages[1:]):
-    #     if i % 2 == 0:
-    #         message(msg.content, is_user=True)
-    #     else:
-    #         message(msg.content, is_user=False)
 
 ###############################################
 
