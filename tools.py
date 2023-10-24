@@ -157,73 +157,10 @@ def print_embedding_cost(texts):
   return total_tokens, total_tokens / 1000 * 0.0004
 
 
-
-def prettify_docs(docs:list) -> list:
-    """
-    Takes in the list of relevant documents and adds spacers to make it pretty
-    """
-    pretty_docs = []
-    for i, doc in enumerate(docs):
-        pretty_docs.append(f"Document {i} {doc.page_content} {doc.metadata}")
-
-    return pretty_docs
-
-
-
 def pretty_print_docs(docs) -> str: 
     string = f"\n{'*' * 100}\n".join([f"Document {i+1}:\n\n" + d.page_content for i, d in enumerate(docs)])
 
     return string
-
-
-
-# INCOMPLETE 
-def use_sagemaker_endpoint():
-    from langchain.llms import sagemaker_endpoint
-    from langchain.llms.sagemaker_endpoint import LLMContentHandler
-    from langchain.chains.question_answering import load_qa_chain
-
-
-
-# INCOMPLETE
-def get_memory():
-    from langchain.memory import ConversationBufferMemory
-    """
-    Instantiate memory for LLM chain. 
-    """
-    memory = ConversationBufferMemory(memory_key='chat_history', return_messages=True)
-    return memory
-
-
-
-
-# INCOMPLETE
-def compressor(compression_type, embeddings, base_retriever, llm):
-    from langchain.document_transformers import EmbeddingsRedundantFilter
-    from langchain.retrievers.document_compressors import EmbeddingsFilter
-    from langchain.retrievers.document_compressors import DocumentCompressorPipeline
-    from langchain.text_splitter import CharacterTextSplitter
-    from langchain.retrievers.document_compressors import LLMChainFilter
-    from langchain.retrievers import ContextualCompressionRetriever
-
-
-    if compression_type == 'redundant':
-        splitter = CharacterTextSplitter(chunk_size=300, chunk_overlap=0, separator=". ")
-        redundant_filter = EmbeddingsRedundantFilter(embeddings=embeddings)
-        relevant_filter = EmbeddingsFilter(embeddings=embeddings, similarity_threshold=0.76)
-        pipeline_compressor = DocumentCompressorPipeline(
-        transformers=[splitter, redundant_filter, relevant_filter]
-        )
-        compression_retriever = ContextualCompressionRetriever(base_compressor=pipeline_compressor, base_retriever=base_retriever)
-
-        return compression_retriever
-    
-    elif compression_type == "llmchainfilter":
-        _filter = LLMChainFilter.from_llm(llm)
-        compression_retriever = ContextualCompressionRetriever(base_compressor=_filter, base_retriever=base_retriever)
-        return compression_retriever
-
-       
 
 
 
