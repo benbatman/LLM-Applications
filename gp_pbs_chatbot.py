@@ -65,7 +65,6 @@ def main():
             stream_handler = StreamHandler(chat_box)
             response, rel_docs, urls, no_context_answer = ask_and_get_answer(vectorstore, question, chat_history=chat_history, temperature=temperature, stream_handler=stream_handler)
             # st.text_area('LLM Answer:', value=response['answer'], height=400)
-            print(response)
             #st.write(response['answer'])
             # st.markdown(response['answer'])
 
