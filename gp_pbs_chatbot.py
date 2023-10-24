@@ -80,16 +80,15 @@ def main():
             st.write(h)
 
             
-            for doc in rel_docs:
-                if not doc.metadata['relevance_score'] < 0.5:
-                    st.subheader("Sources", divider='blue')
-                    st.write(urls)
+            
+            st.subheader("Sources", divider='blue')
+            st.write(urls)
 
-                    # Relevant documents retrieved by similarity search, comment out to remove from printing onto streamlit 
-                    st.subheader("Documents sourced by AI", divider="blue")
-                    rel_docs = pretty_print_docs(rel_docs)
-                    st.write(rel_docs)
-                    #st.text_area("Docs", value=rel_docs)
+            # Relevant documents retrieved by similarity search, comment out to remove from printing onto streamlit 
+            st.subheader("Documents sourced by AI", divider="blue")
+            rel_docs = pretty_print_docs(rel_docs)
+            st.write(rel_docs)
+            #st.text_area("Docs", value=rel_docs)
 
             chat_history.append((question, response['answer']))
             st.session_state.messages = chat_history
